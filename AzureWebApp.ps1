@@ -7,6 +7,8 @@ $RGName = "myWebAppRG"
 $Tier = "Free"
 $AppsServicePlan = "myWebAppService"
 $AppName = "bjpapp"
+# $FQDN = "someFQDN.com"
+
 
 $PropertiesObject = @{
     repoUrl = "https://github.com/bhavenjp/myFirstSite";
@@ -25,3 +27,8 @@ New-AzureRmWebApp -Name $AppName -ResourceGroupName $RGName -Location $Location 
 
 # Modify Web App property to sync with GitHub
 Set-AzureRmResource -PropertyObject $PropertiesObject -ResourceGroupName $RGName -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName $AppName/web -ApiVersion 2015-08-01 -Force
+
+
+# Map a registered domain. Ensure that CNAME record is created mapping "$FQDN" to "$AppName.azurewebsites.net"
+# Set-AzureRmWebApp -Name $AppName -ResourceGroupName $RGName -HostNames @($FQDN,"$AppName.azurewebsites.net")
+
